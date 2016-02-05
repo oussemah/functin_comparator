@@ -1,5 +1,5 @@
 /*
- * Description : Function comparator is a tool to compare functions codes in different (<!--or same!-->)
+ * Description : Function comparator is a tool to compare functions codes in different (<!--or same!-->) files
  *               It's different than diff in the fact that it allows comparison of single functions
  *               undependantly from the position of the function code in the files
  * Author      : Oussema Harbi <oussema.elharbi@gmail.com>
@@ -18,13 +18,22 @@
 using namespace std;
 
 /* ToDo : manage command line options correctly via getopt */
+#ifdef VERBOSE
+static const bool verbose = true;
+#else
 static const bool verbose = false;
+#endif
+
+#ifdef CHECK_SPACE
+static const bool ignore_spaces = false;
+#else
 static const bool ignore_spaces = true;
+#endif
 
 void usage(char* app_name)
 {
   cout << "Usage: " << app_name << " function_1 file_1 function_2 file_2" << endl;
-  cout << "The output will be the different lines between the 2 impelementaions" << endl;
+  cout << "The output will be the different lines between the 2 impelementations" << endl;
 }
 
 
@@ -147,7 +156,7 @@ int main(int argc, char* argv[])
 
     if (!file_1.good() || !file_2.good())
     {
-        cout << " An error occured at lines 1::" << counter_1 << " , 2::" << counter_2 << " while comparing code !" << endl;
+        cout << " An error occured at lines 1::" << counter_1 << " , 2::" << counter_2 << " while reading code !" << endl;
         err = -1;
     }
 
