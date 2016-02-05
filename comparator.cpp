@@ -105,6 +105,18 @@ int main(int argc, char* argv[])
         do {
             getline(file_1, line_1);
             counter_1++;
+#ifndef CHECK_COMMENTS
+            if (line_1.find("/*") != string::npos)
+            {
+                while (line_1.find("*/") == string::npos)
+                {
+                    getline(file_1, line_1);
+                    counter_1++;
+                }
+                getline(file_1, line_1);
+                counter_1++;
+            }
+#endif
             orig_1 = string(line_1);
             if (ignore_spaces)
             {
@@ -115,6 +127,18 @@ int main(int argc, char* argv[])
         do {
             getline(file_2, line_2);
             counter_2++;
+#ifndef CHECK_COMMENTS
+            if (line_2.find("/*") != string::npos)
+            {
+                while (line_2.find("*/") == string::npos)
+                {
+                    getline(file_2, line_2);
+                    counter_2++;
+                }
+                getline(file_2, line_2);
+                counter_2++;
+            }
+#endif
             orig_2 = string(line_2);
             if (ignore_spaces)
             {
